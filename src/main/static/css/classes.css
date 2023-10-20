@@ -1,0 +1,92 @@
+.body{
+    background-color: #68BCC3;
+}
+
+.body-label{
+	display: block;
+    margin-left: 10%;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    color: white;
+    font-size: 60px;
+}
+
+.container{
+	margin: auto;
+    background-color: white;
+    width: 600px;
+    border-radius: 25px;
+    width: 600px;
+    height: auto;
+    padding: 20px;
+}
+
+.title {
+	display: block;
+    text-align: center;
+    color: #FBB15F;
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.input-field{
+    border-color: #68BCC3;
+    color: #808080;
+    width: 400px;
+    padding: 10px;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    border-width: 3px;
+    border-style: solid;
+}
+
+.full-btn {
+	display: block;
+    background-color: #68BCC3;
+    border-color: #68BCC3;
+    border-style: solid;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    margin: auto;
+    margin-top: 50px;
+    width: 120px;
+    height:40px;
+}
+
+.change-btn {
+    background-color: white;
+    border: solid #68BCC3;
+    color: #68BCC3;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    width: 120px;
+    height:40px;
+}
+
+.body{
+    background-color: #68BCC3;
+}
+
+.body-label{
+    color: white;
+    text-align: left;
+    font-size: 120px;
+}
+
+.titel-left{
+    margin-left: 10px;
+    color: #FBB15F;
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.btn-container{
+    float: right;
+    margin-top: 20px;
+    margin-right: 50px;
+}

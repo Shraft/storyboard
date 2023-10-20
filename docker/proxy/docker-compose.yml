@@ -1,0 +1,14 @@
+version: "3.3"
+
+services:
+   reverse_proxy:
+      image: nginx
+      ports:
+         - 80:80
+         - 443:443
+      volumes:
+         - /etc/nginx:/etc/nginx
+         - /etc/letsencrypt/archive:/etc/letsencrypt/archive
+         - /etc/letsencrypt/live:/etc/letsencrypt/live
+         - /etc/ssl/certs:/etc/ssl/certs
+         - /var/log/nginx:/var/log/nginx

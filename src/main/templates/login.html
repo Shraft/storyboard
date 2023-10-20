@@ -1,0 +1,128 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/classes.css') }}">
+  <style>
+    .body{
+    background-color: #68BCC3;
+	}
+
+.body-label{
+	display: block;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    color: white;
+    font-size: 50px;
+}
+
+.welcome-label{
+	display: block;
+	margin-top: 75px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: white;
+    font-size: 50px;
+}
+
+.container{
+	margin: auto;
+    margin-top: 50px;
+    background-color: white;
+    border-radius: 25px;
+    width: 600px;
+    height: auto;
+    padding: 20px;
+}
+
+.title {
+	display: block;
+    text-align: center;
+    color: #FBB15F;
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.input-field{
+    border: 3px solid #68BCC3;
+    color: #808080;
+    width: 400px;
+    padding: 10px;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.full-btn {
+    background-color: #68BCC3;
+    border-color: #68BCC3;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 50px;
+    width: 120px;
+    height: 40px;
+}
+
+.change-btn {
+    background-color: white;
+    border: solid #68BCC3;
+    color: #68BCC3;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    width: 120px;
+    height:40px;
+}
+
+.body{
+    background-color: #68BCC3;
+}
+
+.title-background{
+	display: block;
+	border-radius: 50%;
+    background-color: #FBB15F;
+    border-color: #FBB15F;
+    width: 350px;
+    height: 350px;
+    margin: auto;
+    margin-top: 40px;
+    padding-top: 10px;
+}
+
+.button-container{
+    margin: auto;
+}
+  </style>
+</head>
+<body class="body">
+	<h1>{{error}}</h1>
+  <div class="title-background">
+  	<label class="welcome-label">Willkommen</label>
+  	<label class="body-label">im</label>
+  	<label class="body-label">Storyboard!</label>
+  </div>
+  <div id="container" class="container">
+    <label class="title">Login</label>
+    <form action="{{ url_for('login') }}" method="POST">
+      <div>
+        <input type="text" name="username" class="input-field" placeholder="Benutzername" required>
+      </div>
+      <div>
+        <input type="password" name="password" class="input-field" placeholder="Passwort" required>
+      </div>
+      <div class="button-container">
+        <input type="submit" name="login_btn" class="full-btn" value="Login">
+      </div>
+    </form>
+    <form action="{{url_for('register')}}" method="GET">
+      <div class="button-container">
+        <input type="submit" name="register_btn" class="change-btn" value="Registrieren">
+      </div>
+    </form>
+  </div>
+</body>
+</html>

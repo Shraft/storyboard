@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/classes.css') }}">
+  <style>
+    .changed-full-btn{
+      display: block;
+      background-color: #68BCC3;
+      border-color: white;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+      margin: auto;
+      margin-top: 50px;
+      width: 100px;
+      height:40px;
+
+    }
+
+    .body{
+      margin-top: 50px;
+      background-color: #68BCC3;
+    }
+    .container{
+      margin: auto;
+      background-color: white;
+      width: 600px;
+      border-radius: 25px;
+      width: 600px;
+      height: auto;
+      padding: 20px;
+    }
+    .head-container{
+            margin-bottom: 70px;
+    }
+    .title {
+	        float: left;
+            color: #FBB15F;
+            font-size: 50px;
+            display: block;
+            margin: auto;
+            margin-left: 30px;
+        }
+        .img{
+            width: 30px;
+            height: 30px;
+            padding: 2px;
+        }
+        .left{
+            margin-top: 12px;
+            float: left;
+            margin-left: 25px;
+        }
+        .label{
+      display: block;
+      text-align: left;
+      color: #FBB15F;
+      font-size: 25px;
+      margin-top: 15px;
+    }
+    .input-field{
+    border: 3px solid #68BCC3;
+    color: #808080;
+    width: 400px;
+    padding: 10px;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+   }
+  .form{
+    display: block;
+    margin: auto;
+  }
+  .textarea{
+    border: 3px solid #68BCC3;
+    color: #808080;
+    width: 400px;
+    padding: 10px;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    height: 100px;
+    resize: none;
+  }
+  
+  .story_image {
+  width: 480px;
+  height: 270px;
+  border-radius: 15px;
+}
+  
+  .commodityImage {
+  padding: 5px;
+  width: 480px;
+  height: 270px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+
+}
+  
+  .overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: auto;
+  width: 100%;
+  opacity: 0;
+  transition: .8s ease;
+  background-color: #C96567;
+  font-size: 50px;
+  text-align: center;
+  border-radius: 15px;
+}
+
+.commodityImage:hover .overlay {
+  opacity: 0.6;
+}
+
+.margin-left{
+  display: block;
+  margin-left: 84px;
+}
+
+  </style>
+</head>
+<body class="body">
+  <h1>{{story['error']}}</h1>
+  <div class="container">
+    <div class="head-container">
+      <div>
+          <a href="{{url_for('get_stories')}}"><img src="{{url_for('static', filename='img/linker-pfeil.png')}}" id="user" class="img left"></a>
+      </div>
+      <div>
+        <label class="title">Bearbeitung</label>
+      </div>
+    </div>
+    <div>
+      <form class="form" action="{{ url_for('create_story') }}" method="POST" enctype=multipart/form-data>
+        <div>
+          <input type="text" name="title" placeholder="Titel" class="input-field" value="{{story['title']}}" required>
+          <input type="hidden" name="sid" value="{{story['story_id']}}">
+        </div>
+        <div>
+          <input type="date" id="story_date" name="story_date" value="{{story['story_date']}}" class="input-field">
+        </div>
+        <div>
+          <textarea name="text" placeholder="Beschreibung" class="textarea" required>{{story['text']}}</textarea>
+        </div>
+        <div>
+          <input type="text" id="tags" name="tags" placeholder="Tags" class="input-field" value="{{story['tags']}}">
+        </div>
+        <div>
+          <input type="text" id="persons" name="persons" placeholder="Personen" class="input-field" value="{{story['persons']}}">
+        </div>
+        <div class="margin-left">
+          <input type="checkbox" id="storyispublic" name="public" value="True" {{story['public']}}>
+          <label for="storyispublic">Story is public</label><br>
+        </div>
+        <div class="margin-left">
+          <label class="label">Bilder:</label>
+          <input type="file" class="label"
+             id="avatar" name="file[]" multiple=""
+             accept="image/png, image/jpeg">
+        </div>
+        <div>
+          <input type="submit" class="changed-full-btn" value="Speichern">
+        </div>
+
+      </form>
+    </div>
+    
+    {% if story["picture_count"] > 0 %}
+    
+     <a href="{{url_for('images', sid = story['story_id'], title = story['title'])}}"><img src="{{url_for('static', filename='img/download.png')}}" id="user" class="img"></a>
+  
+  {% for picture in story['pictures'] %}
+  
+<form method="post" action="{{url_for('images')}}">
+  <div class="commodityImage">
+  <img src="{{url_for('static', filename=picture)}}" class="story_image">
+  <input type="hidden" name="picpath" value="{{picture}}">
+  <input type="hidden" name="sid" value="{{story['story_id']}}">
+  <input type="hidden" name="title" value="{{story['title']}}">
+  <input type="submit" name="login_btn" class="overlay" value="Bild entfernen">
+  </div>
+</form>
+  
+  {% endfor %}
+  {% endif %}
+  </div>
+</body>
+</html>

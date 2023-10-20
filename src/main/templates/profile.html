@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/classes.css') }}">
+    <style>
+        .body {
+            background-color: #68BCC3;
+            margin-top: 50px;
+        }
+
+        .body-label {
+            display: block;
+            margin-left: 10%;
+            margin-bottom: 50px;
+            margin-top: 50px;
+            color: white;
+            font-size: 60px;
+        }
+
+        .container {
+            margin: auto;
+            background-color: white;
+            width: 600px;
+            border-radius: 25px;
+            width: 600px;
+            height: auto;
+            padding: 20px;
+        }
+
+        .title {
+            display: block;
+            text-align: left;
+            margin-top: 15px;
+            margin-left: 70px;
+            color: #FBB15F;
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .label {
+            display: block;
+            text-align: left;
+            color: #FBB15F;
+            font-size: 20px;
+            margin-top: 15px;
+            margin-left: 10px;
+        }
+
+        .empty-btn {
+            background-color: white;
+            border-color: #68BCC3;
+            color: #68BCC3;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100px;
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .input-field {
+            border-color: #68BCC3;
+            color: #808080;
+            width: 400px;
+            padding: 10px;
+            margin-left: 10px;
+            margin-top: 5px;
+            border-width: 3px;
+        }
+
+        .full-btn {
+            background-color: #68BCC3;
+            border-color: #68BCC3;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+            width: 150px;
+            height: 40px;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #68BCC3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        .button-container {
+            display: block;
+            justify-content: center;
+            width: 450px;
+        }
+        .left{
+            margin-top: 25px;
+            margin-left: 20px;
+            float: left;
+        }
+        .img{
+            width: 30px;
+            height: 30px;
+            padding: 2px;
+        }
+        .block{
+            display: block;
+            margin-left: 60px;
+        }
+    </style>
+</head>
+<body class="body">
+<div id="container" class="container">
+    <div>
+        <a href="{{url_for('get_stories')}}"><img src="{{url_for('static', filename='img/linker-pfeil.png')}}" id="user" class="img left"></a>
+    </div>
+    <div>
+        <label class="title">Profil</label>
+    </div>
+    <div class="block">
+        <form action="{{ url_for('user') }}/data" method="POST">
+            <div>
+                <label class="label">Benutzername:</label>
+                <input type="text" name="username" class="input-field" value="{{ user['username'] }}">
+            </div>
+            <div>
+                <label class="label">Email:</label>
+                <input type="text" name="email" class="input-field" value="{{ user['email'] }}">
+            </div>
+            <h3>{{data_error}}</h3>
+            <div class="button-container">
+                <input type="submit" name="save_btn" class="full-btn" value="Speichern">
+            </div>
+        </form>
+        <form action="{{ url_for('user') }}/password" method="POST">
+            <div>
+                <label class="label">Aktuelles Passwort:</label>
+                <input type="password" name="current-password" class="input-field" id="current-password">
+            </div>
+            <div>
+                <label class="label">Neues Passwort:</label>
+                <input type="password" name="new-password" class="input-field" id="current-password">
+            </div>
+            <h3>{{password_error}}</h3>
+            <div class="button-container">
+                <input type="submit" name="change_password" class="full-btn" value="Passwort ändern">
+            </div>
+
+        </form>
+    </div>
+</div>
+</body>
+</html>

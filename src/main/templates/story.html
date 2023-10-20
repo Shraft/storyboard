@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/classes.css') }}">
+  <style>
+    .body{
+      margin-top: 50px;
+      background-color: #68BCC3;
+    }
+    .container{
+      margin: auto;
+      background-color: white;
+      width: 600px;
+      border-radius: 25px;
+      width: 600px;
+      height: auto;
+      padding: 20px;
+    }
+    .story-title{
+            float: left;
+            color: #FBB15F;
+            padding-top: auto;
+        }
+        .title-row{
+        	display: block;
+            border: 3px #68BCC3 solid;
+            width: 500px;
+            height: 30px;
+            margin: auto;
+            padding: 5px;
+        }
+        .button-container{
+            float: right;
+            margin-top: 0px;
+        }
+    .create-info{
+            float:left;
+            color: #808080;
+        }
+        .edit-info{
+            float:right;
+            color: #808080;
+        }
+        .label{
+        	color: #808080;
+        }
+
+        .blue-border{
+        }
+        .description-area{
+            border-left: 3px #68BCC3 solid;
+            border-right: 3px #68BCC3 solid;
+            border-bottom: 3px #68BCC3 solid;
+            display: block;
+            width: 500px;
+            height: auto;
+            margin: auto;
+            padding: 5px;
+        }
+        .title {
+	        float: left;
+            color: #FBB15F;
+            font-size: 50px;
+            margin-left: 15px;
+        }
+        .head-container{
+            margin-bottom: 70px;
+
+        }
+        .stories{
+            display: block;
+        }
+        .left{
+            margin-top: 13px;
+            float: left;
+        }
+        .img{
+            width: 30px;
+            height: 30px;
+            padding: 2px;
+        }
+        .pic {
+          display: block;
+          max-width:480px;
+          max-height:270px;
+          width: auto;
+          height: auto;
+          margin: auto;
+          padding: 5px;
+          border-radius: 15px;
+        }
+  </style>
+
+</head>
+<body class="body">
+  <div class="container">
+    <div class="head-container">
+      <div>
+          <a href="{{url_for('get_stories')}}"><img src="{{url_for('static', filename='img/linker-pfeil.png')}}" id="user" class="img left"></a>
+      </div>
+      <div>
+        <label class="title">Story</label>
+        <h6 style="color: white;">-</h6>
+      </div>
+    </div>
+
+    
+    
+    {% from 'stories_macros.html' import show_stories %}
+    {% set context = "showed" %}
+    {{ show_stories(story, story["type"], context) }}
+      
+  
+  {% for picture in story['pictures'] %}
+  <img src="{{url_for('static', filename=picture)}}" class="pic">
+  {% endfor %}
+  </div>
+</body>
+</html>

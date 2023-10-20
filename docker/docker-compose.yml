@@ -1,0 +1,102 @@
+version: "3"
+
+services:
+   Main:
+      build:
+          context: ..
+          dockerfile: ./docker/main_service
+      image: main_service
+      restart: always
+      container_name: main_server
+      volumes:
+         - ~/res:/python-docker/src/main/static/res
+      ports:
+         - 5000:5000
+      network_mode: "host"
+
+   story_app:
+      build:
+          context: ..
+          dockerfile: ./docker/story_service
+      image: story_service
+      restart: always
+      container_name: story_service
+      depends_on:
+         - story_database
+      ports:
+         - 5002:5002
+      network_mode: "host"
+
+
+   user_app:
+      build:
+          context: ..
+          dockerfile: ./docker/user_service
+      image: user_service
+      restart: always
+      container_name: user_service
+      depends_on:
+         - user_database
+      ports:
+         - 5001:5001
+      network_mode: "host"
+
+
+   notification_app:
+      build:
+          context: ..
+          dockerfile: ./docker/notification_service
+      image: notification_service
+      restart: always
+      container_name: notification_service
+      depends_on:
+         - notification_database
+      ports:
+         - 5003:5003
+      network_mode: "host"
+
+
+
+   user_database:
+      image: postgres:latest
+      container_name: user_db
+      hostname: user_db
+      environment:
+         - POSTGRES_PASSWORD=example
+         - POSTGRES_USER=python
+      volumes:
+         - user_db:/var/lib/postgresql/data
+      ports:
+         - 5432:5432
+
+
+   story_database:
+      image: postgres:latest
+      container_name: story_db
+      hostname: story_db
+      environment:
+         - POSTGRES_PASSWORD=example
+         - POSTGRES_USER=python
+      volumes:
+         - story_db:/var/lib/postgresql/data
+      ports:
+         - 5433:5432
+
+   notification_database:
+      image: postgres:latest
+      container_name: notification_db
+      hostname: notification_db
+      environment:
+         - POSTGRES_PASSWORD=example
+         - POSTGRES_USER=python
+      volumes:
+         - notification_db:/var/lib/postgresql/data
+      ports:
+         - 5434:5432
+volumes:
+   user_db:
+      driver: local
+   story_db:
+      driver: local
+   notification_db:
+      driver: local

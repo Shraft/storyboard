@@ -1,0 +1,44 @@
+version: "3"
+
+services:
+   user_database:
+      image: postgres:latest
+      container_name: scc_user_db_container
+      environment:
+         - POSTGRES_PASSWORD=example
+         - POSTGRES_USER=python
+      volumes:
+         - user_db:/var/lib/postgresql/data
+      ports:
+         - 5432:5432
+
+   story_database:
+      image: postgres:latest
+      container_name: scc_story_db_container
+      environment:
+         - POSTGRES_PASSWORD=example
+         - POSTGRES_USER=python
+      volumes:
+         - story_db:/var/lib/postgresql/data
+      ports:
+         - 5433:5432
+
+   notification_database:
+      image: postgres:latest
+      container_name: notification_db_container
+      hostname: notification_db
+      environment:
+         - POSTGRES_PASSWORD=example
+         - POSTGRES_USER=python
+      volumes:
+         - notification_db:/var/lib/postgresql/data
+      ports:
+         - 5434:5432
+
+volumes:
+   user_db:
+      driver: local
+   story_db:
+      driver: local
+   notification_db:
+      driver: local

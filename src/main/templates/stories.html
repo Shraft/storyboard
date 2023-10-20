@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/classes.css') }}">
+    <style>
+        .body{
+      margin-top: 50px;
+      background-color: #68BCC3;
+    }
+    .container{
+      margin: auto;
+      background-color: white;
+      width: 600px;
+      border-radius: 25px;
+      width: 600px;
+      height: 300px;
+      padding: 20px;
+    }
+    .story-title{
+            float: left;
+            color: #FBB15F;
+            font-family: Arial;
+            font-size: 18px;
+            display: block;
+            margin-top: 3px;
+        }
+        .title-row{
+        	display: block;
+            border: 3px #68BCC3 solid;
+            width: 500px;
+            height: 30px;
+            margin: auto;
+            padding: 5px;
+        }
+        .button-container{
+            float: right;
+        }
+    .create-info{
+            float: left;
+            color: #808080;
+            font-style: italic;
+            font-family: Arial;
+            font-size: 13px;
+        }
+        .edit-info{
+            float: right;
+            color: #808080;
+            font-style: italic;
+            font-family: Arial;
+            font-size: 13px;
+        }
+        .label{
+        	color: #808080;
+        	font-family: Arial;
+        	font-size: 15px;
+        }
+
+        .description-area{
+            border-left: 3px #68BCC3 solid;
+            border-right: 3px #68BCC3 solid;
+            border-bottom: 3px #68BCC3 solid;
+            display: block;
+            width: 500px;
+            height: auto;
+            margin: auto;
+            padding: 5px;
+        }
+
+        .img{
+            width: 30px;
+            height: 30px;
+            padding: 2px;
+        }
+        .body{
+            margin-top: 50px;
+            background-color: #68BCC3;
+        }
+
+        .body-label{
+            display: block;
+            margin-left: 10%;
+            margin-bottom: 50px;
+            margin-top: 50px;
+            color: white;
+            font-size: 60px;
+        }
+
+        .container{
+            margin: auto;
+            background-color: white;
+            width: 600px;
+            border-radius: 25px;
+            height: auto;
+            padding: 20px;
+        }
+        .title {
+	        float: left;
+            color: #FBB15F;
+            font-size: 50px;
+            margin-left: 45px;
+        }
+        .head-container{
+            margin-bottom: 70px;
+
+        }
+        .stories{
+            display: block;
+        }
+        .table-label {
+            display: block;
+            text-align: left;
+            color: #FBB15F;
+            font-size: 25px;
+            margin-top: 15px;
+            margin-left: 40px;
+            margin-bottom: 15px;
+        }
+
+        .link {
+            text-decoration: none;
+            color: grey;
+            float: right;
+            margin-right: 50px;
+        }
+    </style>
+</head>
+<body class="body">
+    <div class="container">
+        <div class="head-container">
+            <label class="title">Stories</label></a>
+            <div class="btn-container">
+                <a href="{{url_for('user')}}"><img src="{{url_for('static', filename='img/nutzer.png')}}" id="user" class="img"></a>
+                <a href="{{url_for('create_story')}}"><img src="{{url_for('static', filename='img/post.png')}}" id="new_story" class="img"></a>
+                {% if notifications_count > 0 %}
+			        <a href="{{url_for('notifications')}}"><img src="{{url_for('static', filename='img/notification.png')}}" id="notification" class="img"></a>
+		        {% else %}
+			        <a href="{{url_for('notifications')}}"><img src="{{url_for('static', filename='img/bell.png')}}" id="notification" class="img"></a>
+		        {% endif %}
+                <a href="{{url_for('logout')}}"><img src="{{url_for('static', filename='img/ausloggen.png')}}" id="logout" class="img"></a>
+            </div>
+        </div>
+        <div class="stories">
+      
+        {% from 'stories_macros.html' import show_stories %}
+            {% set context = "show" %}
+            <h6 style="color: white;">-</h6>
+            {% if story_count["created_stories"] > 0 %}
+                <label class="table-label">Von dir erstellte Stories ({{ story_count["created_stories"] }})</label>
+            {% endif %}
+            {% for story in created_stories %}
+                {% set type = "created" %}
+                    {{ show_stories(story, type, context) }}
+            {% endfor %}
+      
+            {% if story_count["tagged_stories"] > 0 %}
+                <label class="table-label">Stories in denen du getaggt bist ({{ story_count["tagged_stories"] }})</label>
+            {% endif %}
+            {% for story in tagged_stories %}
+                {% set type = "tagged" %}
+                    {{ show_stories(story, type, context) }}
+            {% endfor %}
+        
+            {% if story_count["public_stories"] > 0 %}
+                <label class="table-label">Öffentliche Stories ({{ story_count["public_stories"] }})</label>
+            {% endif %}
+            {% for story in public_stories %}
+                {% set type = "public" %}
+                    {{ show_stories(story, type, context) }}
+            {% endfor %}
+            <a href="https://www.flaticon.com/" class="link" title="Verlinkung der Icons">©</a>
+
+        </div>
+    </div>
+
+</body>
+</html>
+

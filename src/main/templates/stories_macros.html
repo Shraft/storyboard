@@ -1,0 +1,40 @@
+{% macro show_stories(story, type, context) %}
+
+    <div>
+        <div class="title-row">
+            <label class="story-title">{{ story["title"] }} • {{ story["story_date"] }}</label>
+            <div class="button-container">
+            	{% if context == "show" %}
+                    <a href="{{ url_for('show_story', sid = story['story_id'], title = story['title']) }}">
+                        <img src="{{url_for('static', filename='img/lupe.png')}}" id="show" class="img">
+                    </a>
+                {% endif %}
+
+                {% if type == "created" or type == "tagged"  %}
+                    <a href="{{ url_for('edit_story', sid = story['story_id'], title = story['title']) }}">
+                        <img src="{{url_for('static', filename='img/bleistift.png')}}" id="edit" class="img">
+                    </a>
+		        {% endif %}
+            </div>
+            <div class="button-container">
+                {% if type == "created" %}
+                    <form action="{{ url_for('delete_story') }}" id="delete" method="POST">
+                        <input type="hidden" value="{{story['story_id']}}" name="del_sid">
+                        <input type="image" src="{{url_for('static', filename='img/loschen.png')}}" class="img">
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+        <div class="description-area">
+            <label class="label">{{ story["text"] }}</label>
+            <br><label class="label">{{ story["tags"] }}</label>
+            <br><label class="label">{{ story["persons"] }}</label>
+            <div>
+                <br><label class="create-info">Erstellung: {{ story["creator"] }}, {{ story["creation_date"] }}</label>
+                <label class="edit-info">zuletzt verändert: {{ story["last_edited_date"] }}</label><br>
+            </div>
+        </div>
+    </div>
+    <br>
+
+{% endmacro %}

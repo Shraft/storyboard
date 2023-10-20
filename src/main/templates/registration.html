@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/classes.css') }}">
+  <style>
+    .button-container{
+      float: inherit;
+    }
+
+    .full-btn {
+	display: block;
+    background-color: #68BCC3;
+    border-color: #68BCC3;
+    border-style: solid;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    width: 120px;
+    height:40px;
+}
+
+.change-btn {
+    background-color: white;
+    border: solid #68BCC3;
+    color: #68BCC3;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    width: 120px;
+    height:40px;
+}
+  </style>
+</head>
+<body class="body">
+  <label class="body-label">Storyboard</label>
+  <div id="container" class="container">
+    <label class="title">Registrierung</label>
+    <form action="{{ url_for('register') }}" id="registration" method="POST">
+      <div>
+        <input type="text" name="username" class="input-field" placeholder="Benutzername" required>
+      </div>
+      <div>
+        <input type="email" name="email" class="input-field" placeholder="Email" required>
+      </div>
+      <div>
+        <input type="password" name="password" class="input-field" placeholder="Passwort" required>
+      </div>
+      <h3>{{error}}</h3>
+    </form>
+    <form action="{{url_for('login')}}" id="login" method="GET">
+    </form>
+    <div class="button-container">
+      <input type="submit" name="sign_up_btn" form="registration" class="full-btn" value="Registrieren">
+      <input type="submit" name="login_btn" form="login" class="change-btn"  value="Login">
+    </div>
+  </div>
+</body>
+</html>

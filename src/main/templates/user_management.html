@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/classes.css') }}">
+  <style>
+    .head-container{
+            margin-bottom: 70px;
+
+        }
+    .container{
+            margin: auto;
+            background-color: white;
+            width: 600px;
+            border-radius: 25px;
+            height: auto;
+            padding: 20px;
+        }
+    .body{
+            margin-top: 50px;
+            background-color: #68BCC3;
+        }
+    .title {
+	        float: left;
+            color: #FBB15F;
+            font-size: 50px;
+            margin-left: 15px;
+        }
+        .img{
+            width: 30px;
+            height: 30px;
+            padding: 2px;
+        }
+        .left{
+            margin-top: 12px;
+            float: left;
+        }
+        .table{
+           margin-left: 45px;
+           border: 3px #68BCC3 solid;
+           width: 500px;
+        }
+        .head-borders{
+          border-bottom: 3px #68BCC3 solid;
+        }
+        .cell-borders{
+          display: block;
+          border-bottom: 2px #68BCC3 solid;
+        }
+        .table {
+          border-collapse: collapse;
+        }
+  </style>
+</head>
+<body class="body">
+    <div class="container">
+        <div class="head-container">
+          <div>
+            <img src="{{url_for('static', filename='img/rechter-pfeil.png')}}" id="back" class="img left">
+          </div>
+          <div>
+            <label class="title">Benutzerverwaltung</label>
+          </div>
+        </div>
+        <table class="table">
+          <tr class="head-borders">
+            <th>ID</th>
+            <th>Benutzername</th>
+            <th>Email</th>
+            <th></th>
+          </tr>
+          {% for user in users %}
+          <tr>
+            <td>{{ user["user_id"] }}</td>
+            <td>{{ user["username"] }}</td>
+            <td>{{ user["email"] }}</td>
+            <td><a href="{{url_for('delete_story')}}">
+              <img src="{{url_for('static', filename='img/post.png')}}" id="new_story" class="img">
+            </a></td>
+          </tr>
+          {% endfor %}
+
+        </table>
+    </div>
+
+</body>
+</html>
